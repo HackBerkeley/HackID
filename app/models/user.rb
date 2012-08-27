@@ -37,4 +37,16 @@ class User
   key :locked_at, Time
   key :unlock_token, String
 
+  key :access_tokens, Array
+
+  def generate_token!
+    token = SecureRandom.urlsafe_base64(64)
+    expiration_time = Time.now + 2.weeks
+    self.access_tokens << {
+      "value" => token,
+      "expiration_time" => expiration_time
+    }
+    self.save && [token, expiration_time]
+  end
+
 end

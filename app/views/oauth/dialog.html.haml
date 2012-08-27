@@ -1,0 +1,10 @@
+=form_tag authorize_client_path(:client_id => @client._id), :method => :post do
+  =hidden_field_tag :redirect_uri, @redirect_uri
+  %p
+    Do you want to allow 
+    %em
+      =@client.name
+    to access your name and email to log in through their app?
+  = check_box_tag :allow_access
+  Allow
+  = submit_tag
