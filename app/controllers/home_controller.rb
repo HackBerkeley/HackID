@@ -21,7 +21,7 @@ end
 enable :sessions
 
 get "/login" do
-  redirect "https://hackid.herokuapp.com/oauth/dialog?client_id=" + \\
+  redirect "https://hackid.herokuapp.com/dialog/oauth?client_id=" + \\
             "\#{client_id}&redirect_uri=\#{URI.escape("http://localhost:5453/oauth_return")}"
 end
 
