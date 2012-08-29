@@ -8,6 +8,7 @@ end
 gem 'thin'
 gem 'foreman'
 gem 'haml'
+gem 'heroku'
 gem 'jquery-rails'
 gem "rspec-rails", ">= 2.11.0", :group => [:development, :test]
 gem "capybara", ">= 1.1.2", :group => :test
