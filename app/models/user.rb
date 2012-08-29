@@ -4,7 +4,7 @@ class User
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable, :lockable,
-         :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable
 
   key :username, String
 
@@ -51,14 +51,10 @@ class User
 
   attr_accessor :sign_up_code
 
-  key :sign_up_code_verified, Boolean, :default => false
-
   validate :community_member?
 
   def community_member?
-    if (sign_up_code_verified or (sign_up_code == ENV["SIGN_UP_CODE"]))
-      sign_up_code_verified = true
-    else
+    unless self.persisted? or (sign_up_code == ENV["SIGN_UP_CODE"])
       errors.add( :sign_up_code, "You did not input a valid sign up code.")
     end
   end
