@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Name</h3>
+<p><%= @client.name %></p>
+
+<h3>Base URI</h3>
+<p><%= @client.base_uri %></p>
+
+<h3>Client ID</h3>
+<p><%= @client._id %></p>
+
+<h3>Client Secret</h3>
+<p><%= @client.client_secret %></p>
+
+<%= link_to 'Edit', edit_client_path(@client) %> |
+<%= link_to 'Back', clients_path %>

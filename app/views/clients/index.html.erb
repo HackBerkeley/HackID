@@ -1,0 +1,35 @@
+<h1>Listing clients</h1>
+
+<%= form_for(Client.new) do |f| %>
+<table>
+  <tr>
+    <th class="name">Name</th>
+    <th class="base_uri">Base URI</th>
+    <th>Client ID</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @clients.each do |client| %>
+  <tr>
+    <td class="name"><%= client.name %></td>
+    <td class="base_uri"><%= client.base_uri %></td>
+    <td><%= client._id %></td>
+    <td><%= link_to 'Show', client %></td>
+    <td><%= link_to 'Edit', edit_client_path(client) %></td>
+    <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+
+  <tr>
+    <td><%= f.text_field :name, :class => :in_table %></td>
+    <td><%= f.text_field :base_uri, :class => :in_table %></td>
+    <td />
+    <td />
+    <td />
+    <td><%= f.submit :create %></td>
+  </tr>
+
+</table>
+<% end %>
