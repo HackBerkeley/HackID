@@ -1,4 +1,9 @@
 <h1>Listing clients</h1>
+<%- if @clients.empty? %>
+    <p>
+        You currently have no Client Apps.<br />Try creating one below by entering a name and the base uri (hostname[:port]).
+    </p>
+<% end %>
 
 <%= form_for(Client.new) do |f| %>
 <table>
