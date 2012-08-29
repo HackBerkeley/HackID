@@ -1,0 +1,68 @@
+<h1>Developer API Documentation</h1>
+<p>That awkward moment where I try to write documentation. I apologize for the poor humor in here -- I was up late and giddy when I wrote this:</p>
+<ol>
+    <li>
+    Send the user with a nice, healthy 302 redirect to:
+    <blockquote style="font-family: monospace;">https://hackid.herokuapp.com/oauth/dialog?client_id=YOUR_CLIENT_ID<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;redirect_uri=YOUR_WEB_URI<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;state=UNIQUE_STATE_CODE
+    </blockquote>
+    </li>
+    <li>
+    User decides whether or not they want to give you access to their basic information on the HackID website.
+    </li>
+    <li>
+    If they allow you access, they will be redirected by to your website to the url:
+    <blockquote style="font-family: monospace;">REDIRECT_URI?code=CODE_WE_CREATE<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;state=STATE_YOU_SENT_US<br />
+    </blockquote>
+    </li>
+    <li>
+    If they don't, you will get something ominous-looking like this:
+    <blockquote style="font-family: monospace;">REDIRECT_URI?error_reason=user_denied<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;error=access_denied<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;error_description=The+user+denied+your+request<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;state=STATE_YOU_SENT_US<br />
+    </blockquote>
+    </li>
+    <li>
+    Now, you do the only thing that makes sense; which my source code informs me would be to request an access token with the code you just got.<br />
+    Make an HTTPS request <em>from your server</em> to the HackID herokuframe of the following form:
+    <blockquote style="font-family: monospace;">https://hackid.herokuapp.com/oauth/access_token?client_id=YOUR_CLIENT_ID<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;redirect_uri=YOUR_WEB_URI<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;client_secret=APP_CLIENT_SECRET<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;code=CODE_YOU_JUST_GOT_IN_THE_REDIRECT
+    </blockquote>
+    </li>
+    <li>
+    If it was a legitimate request, with a valid client id, client secret, and code, the HackID server will respond with a body that looks like this:
+    <blockquote style="font-family: monospace;">
+        access_token=GENERATED_ACCESS_TOKEN&amp;expires=SECONDS_UNTIL_TOKEN_IS_WORTHLESS
+    </blockquote>
+    </li>
+    <li>
+    Now, finally, you can use this access token to get the user's data, in a JSON format:
+    <blockquote style="font-family: monospace;">https://hackid.herokuapp.com/me?access_token=TOKEN_FROM_ABOVE</blockquote>
+    responds with:
+    <blockquote style="font-family: monospace;">
+        {<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name" : "User's Name",<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"email" : "their_email@somewhere.com"<br />
+        }
+    </blockquote>
+    </li>
+    <li>
+    Here is an example ruby/sinatra application with the whole end-to-end:
+    <blockquote style="font-family: monospace;">
+        <%= simple_format(h(@example).gsub(/  /, "&nbsp;&nbsp;")).gsub(/\n<br \/>/, "<br />").html_safe %>
+    </blockquote>
+    Simply stick that code in hackid-tinkering.rb and run it with the command:
+    <blockquote style="font-family: monospace;">
+        CLIENT_ID=your_id CLIENT_SECRET=your_secret ruby hackid-tinkering.rb -p 5453
+    </blockquote>
+    And go to <a href="http://localhost:5453/login">http://localhost:5453/login</a> in your browser.<br /><br />
+    </li>
+    <li>
+    Hack away!
+    </li>
+</ul>
