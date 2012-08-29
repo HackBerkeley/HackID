@@ -49,4 +49,22 @@ class User
     self.save && [token, expiration_time]
   end
 
+  attr_accessor :sign_up_code
+
+  key :sign_up_code_verified, Boolean, :default => false
+
+  validate :community_member?
+
+  def community_member?
+    if (sign_up_code_verified or (sign_up_code == ENV["SIGN_UP_CODE"]))
+      sign_up_code_verified = true
+    else
+      errors.add( :sign_up_code, "You did not input a valid sign up code.")
+    end
+  end
+
+  def develop_app(name, base_uri)
+    Client.create(:name => name, :base_uri => base_uri, :owner => self)
+  end
+
 end

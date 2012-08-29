@@ -1,0 +1,54 @@
+<br/>
+<div id="signing">
+    <div id="sign-in">
+        <h2 class="sign-in">Sign in!</h2>
+        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+            <div><%= f.label :email %><br />
+                <%= f.email_field :email %></div>
+
+            <div><%= f.label :password %><br />
+                <%= f.password_field :password %></div>
+
+            <% if devise_mapping.rememberable? -%>
+                <div><%= f.check_box :remember_me, :class => "checkbox" %> <%= f.label :remember_me %></div>
+            <% end -%>
+
+            <div><%= f.submit "Sign in" %></div>
+        <% end %>
+
+    </div>
+
+    <div id="sign-up">
+        <h2 class="sign-up">Not registered yet? Sign up!</h2>
+        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+            <div id="left-col">
+
+                <div><%= f.label :email %><br />
+                    <%= f.email_field :email %></div>
+
+                <div><%= f.label :name %><br />
+                    <%= f.text_field :username %></div>
+
+                <div><%= f.label :access_code %><br />
+                    <%= f.password_field :sign_up_code %></div>
+
+            </div>
+            <div id="right-col">
+
+                <div><%= f.label :password %><br />
+                    <%= f.password_field :password %></div>
+
+                <div><%= f.label :password_confirmation %><br />
+                    <%= f.password_field :password_confirmation %></div>
+
+                <br/>
+
+                <div><%= f.submit "Sign up" %></div>
+
+            </div>
+        <% end %>
+    </div>
+</div>
+
+<%= render "devise/shared/links" %>

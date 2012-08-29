@@ -11,27 +11,233 @@
  *= require_self
  *= require_tree .
 */
-.brand {
-  float: left;
-  padding-right: 8px;
-}
+@font-face {font-family: 'Code-Pro-Demo';src: url('/css/webfonts/16CC75_0.eot');src: url('/css/webfonts/16CC75_0.eot?#iefix') format('embedded-opentype'),url('/css/webfonts/16CC75_0.woff') format('woff'),url('/css/webfonts/16CC75_0.ttf') format('truetype'),url('/css/webfonts/16CC75_0.svg#wf') format('svg');}
 ul.nav {
   list-style: none;
   margin: 0 0 2em;
   padding: 0;
 }
 ul.nav li {
+  margin: 3px;
   display: inline;
+}
+ul.nav li a {
+  text-decoration: none;
+  font-family: 'Code-Pro-Demo', sans-serif;
+  font-size: 20px;
+  color: #A5D500;
 }
 #flash_notice, #flash_alert {
   padding: 5px 8px;
-  margin: 10px 0;
+  margin: 33px 0 10px 0;
 }
 #flash_notice {
-  background-color: #CFC;
-  border: solid 1px #6C6;
+  background-color: #EEFFB5;
+  border: solid 2px #789C00;
 }
 #flash_alert {
   background-color: #FCC;
   border: solid 1px #C66;
+}
+body {
+  font-family: 'Code-Pro-Demo', sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  background-image: url("/assets/background");
+}
+#container {
+  width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#content {
+  margin-top: 66px;
+  padding: 10px;
+  padding-top: 60px;
+  border: solid black 2px;
+  background-color: #999;
+}
+
+#logo-container {
+  position: absolute;
+  top: 25px;
+  z-index: 2;
+  padding-left: 6px;
+  padding-right: 3px;
+  margin-left: 80px;
+  width: 270px;
+  height: 77px;
+  border: solid black 2px;
+  background-color: #555;
+  font-size: 70px;
+  color: #ffffff;
+  font-family: 'Code-Pro-Demo', sans-serif;
+}
+
+#navigation {
+  position: absolute;
+  color: white;
+  font-family: 'Code-Pro-Demo', sans-serif;
+  font-size: 20px;
+  top: 68px;
+  width: 900px;
+  height: 20px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  text-align: right;
+}
+
+h1 {
+  border-bottom: solid black 2px;
+  width: 910px;
+  text-transform: uppercase;
+  font-family: 'Code-Pro-Demo', sans-serif;
+  font-weight: normal;
+  font-size: 32px;
+}
+
+h2.sign-in {
+  margin-top: 0;
+  border-bottom: solid black 2px;
+  width: 220px;
+  text-transform: uppercase;
+  font-family: 'Code-Pro-Demo', sans-serif;
+  font-weight: normal;
+  font-size: 24px;
+}
+
+h2.sign-up {
+  margin-top: 0;
+  border-bottom: solid black 2px;
+  width: 495px;
+  text-transform: uppercase;
+  font-family: 'Code-Pro-Demo', sans-serif;
+  font-weight: normal;
+  font-size: 24px;
+}
+
+p {
+  font-family: 'Code-Pro-Demo', sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+#signing {
+  width: 920px;
+  height: 240px;
+}
+
+#edit-account-container {
+  width: 920px;
+  height: 300px;
+}
+
+#sign-in {
+  position: absolute;
+  margin: 15px;
+  margin-left: 50px;
+  width: 270px;
+  border-right: solid 1px black;
+}
+
+#sign-up {
+  position: absolute;
+  margin: 15px;
+  margin-left: 365px;
+  width: 550px;
+}
+
+#edit-account {
+  position: absolute;
+  margin: 15px;
+  margin-left: 50px;
+  width: 550px;
+}
+
+#edit-account-container img {
+  position: absolute;
+  margin-top: 80px;
+  margin-left: 670px;
+  width: 128px;
+  height: 128px;
+}
+
+#sign-in input {
+  width: 220px;
+  margin-bottom: 8px;
+}
+
+#sign-in input.checkbox {
+  width: 15px;
+}
+
+#sign-up input {
+  width: 220px;
+  margin-bottom: 8px;
+}
+
+#sign-up input.checkbox {
+  width: 15px;
+}
+
+#edit-account input {
+  width: 220px;
+  margin-bottom: 8px;
+}
+
+#edit-account input.checkbox {
+  width: 15px;
+}
+
+#sign-up #left-col {
+  position: absolute;
+  width: 270px;
+}
+
+#sign-up #right-col {
+  margin-left: 270px;
+  position: absolute;
+  width: 270px;
+}
+
+#edit-account #left-col {
+  position: absolute;
+  width: 270px;
+}
+
+#edit-account #right-col {
+  margin-left: 270px;
+  width: 270px;
+}
+
+a {
+  color: #A5D500;
+  text-decoration: none;
+}
+
+a.logo {
+  color: white;
+}
+
+a:hover {
+  color: #FFFFFF;
+}
+
+#register-links {
+  border-top: solid 1px black;
+  padding-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+  list-style: none;
+  color: #FFFFFF;
+}
+
+#register-links li {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 200px;
+  text-align: center;
+  display: inline;
 }

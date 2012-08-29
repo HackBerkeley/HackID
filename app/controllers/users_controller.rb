@@ -9,6 +9,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def apps
+    @clients = Client.where(:owner_id => current_user._id)
+    render :template => "clients/index"
+  end
+
   def api
     @user = User.where(:access_tokens => {"$elemMatch" => {:value => params[:access_token]}}).first
     render :json => {

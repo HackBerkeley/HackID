@@ -1,0 +1,19 @@
+<ul id="register-links">
+
+<%- if controller_name != 'registrations' && controller_name != 'sessions' %>
+  <li><%= link_to "Sign in / sign up", new_registration_path(resource_name) %></li>
+<% end -%>
+
+<%- if controller_name != 'passwords' %>
+  <li><%= link_to "Reset", new_password_path(resource_name) %> password.</li>
+<% end -%>
+
+<%- if controller_name != 'confirmations' %>
+  <li><%= link_to "Resend", new_confirmation_path(resource_name) %> confirmation email.</li>
+<% end -%>
+
+<%- if controller_name != 'unlocks' %>
+  <li><%= link_to "Unlock", new_unlock_path(resource_name) %> frozen account.</li>
+<% end -%>
+
+</span>

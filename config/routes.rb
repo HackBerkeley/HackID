@@ -1,6 +1,6 @@
 HackidServerRails::Application.routes.draw do
   root :to => "home#index"
-  devise_for :user
+  devise_for :user, :controllers => {:registrations => "registrations"}
   resources :users, :only => [:index, :show]
   get "/oauth/dialog" => "oauth#dialog"
   post "/oauth/dialog" => "oauth#authorize", :as => :authorize_client

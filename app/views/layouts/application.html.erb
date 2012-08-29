@@ -4,24 +4,30 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hackid Server Rails</title>
+    <title>HackID</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <%= stylesheet_link_tag    "application", :media => "all" %>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
     <div id="container" class="container">
-      <header>
-        <%= render 'layouts/navigation' %>
-        <%= render 'layouts/messages' %>
-      </header>
-      <div id="main" role="main">
-        <%= yield %>
+      <div id="logo-container">
+        <%= link_to "HACK<span style=\"color:#A5D500;\">ID</span>".html_safe, root_path, :class => :logo %>
       </div>
-      <footer>
-      </footer>
+      <div id="navigation">
+        <%= render 'layouts/navigation' %>
+      </div>
+      <div id="content">
+        <header>
+          <%= render 'layouts/messages' %>
+        </header>
+        <div id="main" role="main">
+          <%= yield %>
+        </div>
+      </div>
     </div> <!--! end of #container -->
   </body>
 </html>
