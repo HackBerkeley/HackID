@@ -39,12 +39,17 @@ class User
 
   key :access_tokens, Array
 
-  def generate_token!
+  def generate_token!(client)
+    existing_token = self.access_tokens.find do |access_token|
+      (access_token["client_id"] == client._id) && (access_token["expiration_time"].to_i > (Time.now + 2.hours).to_i)
+    end
+    return [existing_token["value"], existing_token["expiration_time"].to_i] if existing_token
     token = SecureRandom.urlsafe_base64(64)
     expiration_time = Time.now + 2.weeks
     self.access_tokens << {
       "value" => token,
       "expiration_time" => expiration_time
+      "client_id" => client._id
     }
     self.save && [token, expiration_time]
   end
