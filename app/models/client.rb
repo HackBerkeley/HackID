@@ -40,8 +40,9 @@ class Client
             }
           }
         }
-        count = Object.keys(merged_users).length
-        return { users : merged_users, count : count };
+        var i = 0;
+        for (var u in merged_users) { i++; }
+        return { users : merged_users, count : i };
       }
     END
     AccessCode.collection.map_reduce(map, reduce, :out => { :reduce => "hot_clients" })
