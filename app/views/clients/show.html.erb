@@ -12,5 +12,7 @@
 <h3>Client Secret</h3>
 <p><%= @client.client_secret %></p>
 
+<p>Currently <%- unless @client.publicly_accessible %>not <% end %>visible publicly on HackID to other users.</p>
+
 <%= link_to 'Edit', edit_client_path(@client) %> |
 <%= link_to 'Back', clients_path %>

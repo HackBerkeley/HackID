@@ -12,8 +12,9 @@
   <% end %>
 
   <div class="fields">
-    Name: <%= f.text_field :name %>
-    Base URI: <%= f.text_field :base_uri %>
+    Name: <%= f.text_field :name %><br />
+    Base URI: <%= f.text_field :base_uri %><br />
+    <%= f.check_box :publicly_accessible %> Publicly display app on HackID
   </div>
 
   <div class="actions">

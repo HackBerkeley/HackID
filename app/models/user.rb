@@ -41,14 +41,14 @@ class User
 
   def generate_token!(client)
     existing_token = self.access_tokens.find do |access_token|
-      (access_token["client_id"] == client._id) && (access_token["expiration_time"].to_i > (Time.now + 2.hours).to_i)
+      (access_token["client_id"] == client._id) && (access_token["expiration_time"] > (Time.now + 2.hours))
     end
-    return [existing_token["value"], existing_token["expiration_time"].to_i] if existing_token
+    return [existing_token["value"], existing_token["expiration_time"]] if existing_token
     token = SecureRandom.urlsafe_base64(64)
     expiration_time = Time.now + 2.weeks
     self.access_tokens << {
       "value" => token,
-      "expiration_time" => expiration_time
+      "expiration_time" => expiration_time,
       "client_id" => client._id
     }
     self.save && [token, expiration_time]
@@ -64,8 +64,8 @@ class User
     end
   end
 
-  def develop_app(name, base_uri)
-    Client.create(:name => name, :base_uri => base_uri, :owner => self)
+  def develop_app(name, base_uri, publicly_accessible = false)
+    Client.create(:name => name, :base_uri => base_uri, :owner => self, :publicly_accessible => publicly_accessible)
   end
 
 end

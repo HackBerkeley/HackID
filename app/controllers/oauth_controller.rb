@@ -5,6 +5,9 @@ class OauthController < ApplicationController
     @state = params[:state]
     @client = Client.find(params[:client_id])
     @redirect_uri = params[:redirect_uri]
+    if access_code = AccessCode.where(:client_id => @client._id, :user_id => current_user._id).first
+      redirect_to "#{@redirect_uri}?state=#{@state}&code=#{access_code.value}"
+    end
   end
 
   def authorize

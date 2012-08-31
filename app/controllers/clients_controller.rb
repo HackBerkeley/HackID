@@ -44,7 +44,7 @@ class ClientsController < ApplicationController
   # POST /clients
   # POST /clients.json
   def create
-    @client = current_user.develop_app(params[:client][:name], params[:client][:base_uri])
+    @client = current_user.develop_app(params[:client][:name], params[:client][:base_uri], params[:client][:public])
 
     respond_to do |format|
       if @client.save
