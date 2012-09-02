@@ -1,5 +1,6 @@
 class OauthController < ApplicationController
   before_filter :authenticate_user!, :except => :access_token
+  protect_from_forgery :except => :access_token
 
   def dialog
     @state = params[:state]
