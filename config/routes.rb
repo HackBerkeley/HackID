@@ -6,6 +6,7 @@ HackidServerRails::Application.routes.draw do
   get "/docs" => "home#dev_api", :as => "developer_documentation"
   get "/oauth/dialog" => "oauth#dialog"
   get "/dialog/oauth" => "oauth#dialog"
+  get "/oauth/authorize" => "oauth#dialog"
   post "/oauth/dialog" => "oauth#authorize", :as => :authorize_client
   get "/oauth/access_token" => "oauth#access_token", :as => :access_token
   get "/me" => "users#api"
