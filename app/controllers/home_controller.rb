@@ -26,8 +26,11 @@ get "/login" do
 end
 
 get "/oauth_return" do
-  b = HTTParty.get("http://hackid.herokuapp.com/oauth/access_token?code=" + \\
-                   "\#{params[:code]}&client_secret=\#{client_secret}&client_id=\#{client_id}").body
+  b = HTTParty.post("http://hackid.herokuapp.com/oauth/access_token", { :query => {
+    "code" => params[:code],
+    "client_secret" => client_secret,
+    "client_id" => client_id
+  }}).body
   a = Rack::Utils.parse_nested_query(b)["access_token"]
   "Hello, \#{JSON.parse(HTTParty.get("http://hackid.herokuapp.com/me?access_token=\#{a}").body)["name"]}"
 end
